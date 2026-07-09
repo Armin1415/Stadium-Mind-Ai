@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StadiumMind AI - FIFA World Cup 2026 Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Global Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-icon">S</div>
+      <div class="logo-text">StadiumMind<span>AI</span></div>
+    </div>
+    
+    <!-- Match status bar -->
+    <div class="match-ticker">
+      <span class="ticker-pulse"></span>
+      <strong id="match-title">USA vs MEXICO</strong>
+      <span id="match-score">2 - 1 (78')</span>
+    </div>
+
+    <!-- Alarm triggering toggle -->
+    <div>
+      <button id="emergency-trigger-btn" class="emergency-btn" onclick="triggerEmergencyState()">TRIGGER CRITICAL EMERGENCY</button>
+    </div>
+  </header>
+
+  <!-- Emergency Alarm Banner -->
+  <div class="emergency-banner" id="emergency-alarm-banner">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <span class="ticker-pulse" style="width:12px; height:12px; background-color:#fff; box-shadow:0 0 15px #fff;"></span>
+      <div>
+        <h4 style="font-family:'Space Grotesk'; font-weight:700;">CRITICAL SYSTEM EMERGENCY ACTION IN PROGRESS</h4>
+        <p style="font-size:0.85rem; opacity:0.9;">Gemini Safety Agent is routing evacuation plans and translating alerts.</p>
+      </div>
+    </div>
+    <div style="font-size: 1.5rem; font-weight:800; font-family:'Space Grotesk';">SECTOR B RED EVAC</div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <nav>
+      <div class="nav-item active" data-view="command_center">
+        <span class="nav-icon">📊</span>
+        <span>Command Center</span>
+      </div>
+      <div class="nav-item" data-view="fan_sim">
+        <span class="nav-icon">📱</span>
+        <span>Fan Simulator</span>
+      </div>
+      <div class="nav-item" data-view="volunteer_sim">
+        <span class="nav-icon">🤝</span>
+        <span>Volunteer Copilot</span>
+      </div>
+      <div class="nav-item" data-view="sustainability">
+        <span class="nav-icon">🍃</span>
+        <span>Sustainability & Transit</span>
+      </div>
+    </nav>
+
+    <!-- Main Content workspaces -->
+    <main>
+
+      <!-- VIEW: Command Center Dashboard -->
+      <section id="view-command-center">
+        <div class="dashboard-grid">
+          
+          <!-- Column 1: Digital Twin & Interactive map -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="glass-card">
+              <h3 class="card-title">
+                <span>Stadium Digital Twin Telemetry Map</span>
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Click sectors to view AI details</span>
+              </h3>
+              <div class="stadium-map-wrapper" id="stadium-map-container">
+                <!-- SVG map injected here dynamically by app.js -->
+              </div>
+            </div>
+            
+            <div class="glass-card">
+              <h3 class="card-title">Live Crowd Density & Operations Feed</h3>
+              <div class="feed-list" id="incidents-feed">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Incident logs & Sector Details panel -->
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="glass-card">
+              <h3 class="card-title">Emergency Response Console</h3>
+              <div id="emergency-action-plan-log" style="min-height: 120px;">
+                <p style="color: var(--text-muted); font-size:0.9rem;">No active critical emergencies. System running normal.</p>
+              </div>
+            </div>
+
+            <div id="sector-details">
+              <div class="glass-card">
+                <h4 class="card-title">Sector Operations Info</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Select any stadium sector on the map overlay to view real-time occupant metrics, average queue times, and trigger crowd-aware pathing bypass commands.</p>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <h3 class="card-title">Steward Dispatch Registry</h3>
+              <div class="feed-list" id="volunteers-grid">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW: Fan Assistant Simulator -->
+      <section id="view-fan-simulator" class="sim-grid" style="display: none;">
+        <!-- Mobile phone framing simulator -->
+        <div class="glass-card" style="max-width: 450px; margin: 0 auto; border-radius: 36px; padding: 1.5rem 1rem; border: 4px solid var(--border-glass);">
+          <div style="background: #000; height: 18px; width: 120px; margin: -10px auto 10px auto; border-radius: 10px;"></div>
+          <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:1rem; padding: 0 0.5rem; color:var(--text-secondary);">
+            <span>📶 Stadium Free Wi-Fi</span>
+            <span>10:45 AM</span>
+            <span>🔋 98%</span>
+          </div>
+
+          <h3 style="font-family:'Space Grotesk'; font-size:1.1rem; border-bottom:1px solid var(--border-glass); padding-bottom:0.5rem; margin-bottom:1rem;">
+            🏟️ Fan Assistant AI
+          </h3>
+
+          <div class="chat-container">
+            <div class="chat-messages" id="fan-chat-messages">
+              <div class="chat-bubble ai">
+                Hi! Scanned your ticket barcode for the USA vs Mexico match. I am your Gemini-enabled assistant. You can ask me questions naturally like:
+                <br><br>
+                - <em>"Where is my seat?"</em>
+                - <em>"Nearest restroom wait time?"</em>
+                - <em>"How long is the Gate A queue?"</em>
+                - <em>"Where is the vegetarian food?"</em>
+                - <em>"Help! I lost my child."</em>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <input type="text" id="fan-chat-input" class="chat-input" placeholder="Ask Gemini something...">
+              <button class="chat-send-btn" onclick="sendFanChatMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:1.5rem;">
+          <div class="glass-card">
+            <h3 class="card-title">Fan AI Mobile App Grounding Context</h3>
+            <p style="font-size:0.9rem; line-height:1.5; color:var(--text-secondary);">
+              This simulator mimics the spectator companion app. When the fan types questions, the context is grounded with their scanned ticket metadata and live IoT occupancy data.
+            </p>
+            <div style="margin-top: 1rem;">
+              <strong>Simulation Scenarios (Click to test):</strong>
+              <div class="button-grid">
+                <button class="btn-secondary" onclick="document.getElementById('fan-chat-input').value='Where is my seat?'; sendFanChatMessage();">Query: Where is my seat?</button>
+                <button class="btn-secondary" onclick="document.getElementById('fan-chat-input').value='Nearest restroom?'; sendFanChatMessage();">Query: Restroom queues</button>
+                <button class="btn-secondary" onclick="document.getElementById('fan-chat-input').value='Where is the vegetarian food?'; sendFanChatMessage();">Query: Concession locator</button>
+                <button class="btn-secondary" onclick="document.getElementById('fan-chat-input').value='Help! I lost my child'; sendFanChatMessage();">🚨 Trigger Lost Child Alert</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="glass-card">
+            <h4 class="card-title">RAG ground parameters</h4>
+            <ul style="font-size:0.85rem; padding-left:1.2rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.4rem;">
+              <li><strong>User Profile:</strong> Seated in Section 104, General Access, English-speaking.</li>
+              <li><strong>CCTV Queue feed:</strong> Standby times are computed at 1-minute resolution windows via Vision AP.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: Volunteer Copilot -->
+      <section id="view-volunteer" class="sim-grid" style="display: none;">
+        <div class="glass-card">
+          <h3 class="card-title">Volunteer Task Stream & Multilingual AI</h3>
+          <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1rem;">
+            Volunteers are assigned emergency tasks based on proximity. The Volunteer Copilot translates prompts instantly and guides stewards through critical safety guidelines.
+          </p>
+          
+          <div style="margin-top: 1rem;">
+            <strong>Mock Broadcast Scenarios:</strong>
+            <div class="button-grid">
+              <button class="btn-secondary" onclick="simulateVolunteerTranslation('wheelchair')">Request Wheelchair Escort (French translation)</button>
+              <button class="btn-secondary" onclick="simulateVolunteerTranslation('medical')">First Aid Dispatch (Spanish & Arabic translation)</button>
+            </div>
+          </div>
+
+          <div id="volunteer-trans-output" style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; min-height: 120px; border:1px solid var(--border-glass);">
+            <p style="color:var(--text-muted); font-size:0.85rem; font-style:italic;">Choose a scenario above to test translation output...</p>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <h3 class="card-title">Active Volunteer Crew</h3>
+          <p style="font-size:0.85rem; color: var(--text-secondary); margin-bottom:1rem;">Simulating real-time geolocation of active volunteers in local sectors.</p>
+          <div class="feed-list">
+            <div class="feed-item">
+              <div>
+                <strong>Carlos Mendez</strong> (Block 104) <span class="severity-pill severity-low">Available</span>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Translation: ES, EN | Certification: First Aid</div>
+              </div>
+            </div>
+            <div class="feed-item">
+              <div>
+                <strong>Yuki Tanaka</strong> (Elevator West 2) <span class="severity-pill severity-medium" style="background:rgba(255,179,0,0.1); color:var(--color-warning);">Busy (On Route)</span>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.25rem;">Translation: JA, KO | Certification: Mobility Guide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: Sustainability & Transit -->
+      <section id="view-sustainability" class="sim-grid" style="display: none;">
+        
+        <!-- Sustainability Metrics -->
+        <div class="glass-card">
+          <h3 class="card-title">Environmental Energy & Waste Management</h3>
+          <div id="sustainability-details">
+            <!-- Injected by app.js -->
+          </div>
+          <div style="margin-top: 1rem; background: rgba(0,242,254,0.03); border:1px solid rgba(0,242,254,0.1); padding: 1rem; border-radius: 8px;">
+            <strong style="font-size: 0.85rem; color: var(--accent-cyan);">Sustainability AI Plan</strong>
+            <p style="font-size:0.8rem; margin-top:0.25rem; color:var(--text-secondary);">
+              Calculated carbon offset targets for USA vs MEXICO match: <strong>dimming Level 3 concourse lights</strong> by 15% post-kickoff. Redirection of 120 surplus snacks from MetLife Lounge to Newark Shelter scheduled.
+            </p>
+          </div>
+        </div>
+
+        <!-- Transit dashboard -->
+        <div class="glass-card">
+          <h3 class="card-title">Transit Congestion Control</h3>
+          <div id="transit-details">
+            <!-- Injected by app.js -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Load Mock Data first, then main application driver -->
+  <script src="mock_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
